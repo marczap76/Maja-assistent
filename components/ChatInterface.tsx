@@ -112,7 +112,7 @@ export default function ChatInterface() {
   };
 
   return (
-    <div className="chat-container">
+    <div className="flex flex-col h-[100dvh] bg-transparent relative overflow-hidden">
       {/* Header */}
       <header className="chat-header">
         <div className="header-avatar overflow-hidden p-0 bg-transparent">
@@ -177,7 +177,11 @@ export default function ChatInterface() {
               transition={{ duration: 0.2 }}
             >
               <div
-                className={`message-bubble ${message.role === "user" ? "bubble-user" : "bubble-assistant"}`}
+                className={`max-w-[85%] rounded-2xl px-5 py-3.5 shadow-sm transform transition-all duration-200 hover:scale-[1.01] ${
+                  message.role === 'user'
+                    ? 'bg-amber-800 text-amber-50 rounded-br-none'
+                    : 'message-bubble border border-[rgba(99,59,33,0.15)] text-[var(--color-text)] rounded-bl-none'
+                }`}
               >
                 <div className="message-sender">
                   {message.role === "user" ? (
@@ -187,7 +191,7 @@ export default function ChatInterface() {
                   )}
                   <span>{message.role === "user" ? "Tu" : "Maja"}</span>
                 </div>
-                <div className="message-content">
+                <div className="text-base prose prose-amber max-w-none leading-relaxed prose-p:my-2 prose-headings:my-4 prose-ul:my-3 prose-ol:my-3 prose-li:my-1 prose-strong:text-amber-900 prose-strong:font-bold">
                   <ReactMarkdown>{message.content}</ReactMarkdown>
                 </div>
                 <span className="message-time">{formatTime()}</span>
