@@ -147,9 +147,9 @@ export default function ChatInterface() {
             </p>
             <div className="welcome-suggestions">
               {[
-                "Quali sono le regole delle carte strategiche?",
+                "Quanto costa un'armatura leggera?",
                 "Quali sono le regole di combattimento?",
-                "Che equipaggiamento posso usare?",
+                "Qual è il termine ultimo per l'iscrizione?",
               ].map((suggestion) => (
                 <button
                   key={suggestion}
