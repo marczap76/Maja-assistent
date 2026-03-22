@@ -2,6 +2,9 @@ import { createOpenAI } from '@ai-sdk/openai';
 import { streamText, APICallError } from 'ai';
 import { getDocumentContext } from '@/lib/documentContext';
 
+export const maxDuration = 60; // Consenti fino a 60 secondi di esecuzione su Vercel
+
+
 const openrouter = createOpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
   apiKey: process.env.OPENROUTER_API_KEY,

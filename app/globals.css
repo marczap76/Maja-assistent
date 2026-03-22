@@ -353,7 +353,7 @@ html, body {
   border: none;
   outline: none;
   color: var(--color-text);
-  font-size: 14px;
+  font-size: 16px; /* Aumentato a 16px per evitare lo zoom automatico su iPhone/iOS */
   line-height: 1.4;
   resize: none;
   max-height: 120px;
