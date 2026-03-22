@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useChat } from "ai/react";
 
 export default function ChatInterface() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading, stop, append } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, stop, append, error } = useChat({
     api: "/api/chat",
     onError: (err: Error) => {
       console.error("Chat error:", err);
@@ -195,6 +195,14 @@ export default function ChatInterface() {
             </motion.div>
           ))}
         </AnimatePresence>
+
+        {error && (
+          <div className="flex justify-center w-full my-4">
+            <div className="bg-red-900/10 border border-red-900/30 text-red-900 px-4 py-2 rounded-lg text-sm flex items-center gap-2 max-w-[85%]">
+              <span className="font-bold">Errore di comunicazione:</span> {error.message || "L'assistente ha impiegato troppo tempo o c'è un errore di connessione."}
+            </div>
+          </div>
+        )}
 
         {/* Typing indicator */}
         {isLoading && (
