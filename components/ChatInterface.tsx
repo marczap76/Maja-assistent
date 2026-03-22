@@ -1,13 +1,13 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { Send, Square, Bot, User, Mic } from "lucide-react";
+import { Send, Square, Bot, User, Mic, Trash2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChat } from "ai/react";
 
 export default function ChatInterface() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading, stop, append, error } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, stop, append, error, setMessages } = useChat({
     api: "/api/chat",
     onError: (err: Error) => {
       console.error("Chat error:", err);
@@ -115,15 +115,27 @@ export default function ChatInterface() {
     <div className="flex flex-col h-[100dvh] bg-transparent relative overflow-hidden">
       {/* Header */}
       <header className="chat-header">
-        <div className="header-avatar overflow-hidden p-0 bg-transparent">
-          <img src="/icon.png" alt="Maja Icon" className="w-full h-full object-cover" />
+        <div className="flex items-center">
+          <div className="header-avatar overflow-hidden p-0 bg-transparent">
+            <img src="/icon.png" alt="Maja Icon" className="w-full h-full object-cover" />
+          </div>
+          <div className="header-info">
+            <h1 className="header-title">Maja-assistent</h1>
+            <p className="header-subtitle">
+              {isLoading ? "sta scrivendo..." : "Le Cronache di Maja"}
+            </p>
+          </div>
         </div>
-        <div className="header-info">
-          <h1 className="header-title">Maja-assistent</h1>
-          <p className="header-subtitle">
-            {isLoading ? "sta scrivendo..." : "Le Cronache di Maja"}
-          </p>
-        </div>
+        {messages.length > 0 && (
+          <button 
+            onClick={() => setMessages([])} 
+            className="p-2 text-amber-900/60 hover:text-amber-900 transition-colors ml-auto"
+            title="Pulisci chat"
+            aria-label="Pulisci chat"
+          >
+            <Trash2 className="w-5 h-5" />
+          </button>
+        )}
       </header>
 
       {/* Messages Area */}
